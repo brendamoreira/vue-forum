@@ -11,6 +11,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   { path: "/", name: "Home", component: HomePage },
   { path: "/me", name: "Profile", component: ProfilePage },
+  { path: "/me/edit", name: "ProfileEdit", component: ProfilePage,props: {edit: true} },
   { path: "/category/:id", name: "Category", component: CategoryPage, props: true},
   { path: "/forum/:id", name: "Forum", component: ForumPage, props: true},
   { path: "/thread/:id", name: "ThreadShow", component: ThreadShow, props: true , beforeEnter(to, from, next) {
