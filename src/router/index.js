@@ -10,7 +10,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   { path: "/", name: "Home", component: HomePage },
-  { path: "/me", name: "Profile", component: ProfilePage },
+  { path: "/me", name: "Profile", component: ProfilePage, meta: {toTop: true, smoothScroll: true} },
   { path: "/me/edit", name: "ProfileEdit", component: ProfilePage,props: {edit: true} },
   { path: "/category/:id", name: "Category", component: CategoryPage, props: true},
   { path: "/forum/:id", name: "Forum", component: ForumPage, props: true},
@@ -36,4 +36,10 @@ const routes = [
 export default createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior (to){
+    const scroll = {}
+    if (to.meta.toTop) scroll.top = 0
+    if(to.meta.smoothScroll) scroll.behavior = 'smooth'
+    return scroll
+  }
 });
