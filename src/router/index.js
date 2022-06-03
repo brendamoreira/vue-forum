@@ -1,5 +1,6 @@
 import HomePage from "@/pages/HomePage";
 import ThreadShow from "@/pages/ThreadShow";
+import ThreadCreate from "@/pages/ThreadCreate";
 import ForumPage from "@/pages/ForumPage";
 import ProfilePage from "@/pages/ProfilePage";
 import NotFound from "@/pages/NotFound";
@@ -30,6 +31,7 @@ const routes = [
       })
     }
   } },
+  { path: "/form/:forumId/thread/create", name: "ThreadCreate", component: ThreadCreate, props: true },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ];
 
