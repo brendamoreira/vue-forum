@@ -1,10 +1,10 @@
 <template>
   <div class="col-full push-top">
     <h1>
-      Create new thread in <i>{{ forum.name }}</i>
+      Editing <i>{{ thread.title }}</i>
     </h1>
 
-    <ThreadEditor @save="save" @cancel="cancel" />
+    <ThreadEditor :title="thread.title" :text="text" @save="save" @cancel="cancel" />
   </div>
 </template>
 <script>
@@ -12,19 +12,24 @@ import ThreadEditor from "@/components/ThreadEditor";
 export default {
   components: { ThreadEditor },
   props: {
-    forumId: { type: String, required: true },
+    threadId: { type: String, required: true },
   },
   computed: {
-    forum() {
-      return this.$store.state.forums.find(
-        (forum) => forum.id === this.forumId
-      );
+    thread() {
+      return this.$store.state.threads.find(
+        (thread) => thread.id === this.threadId
+      ) || {};
+    },
+    text() {
+      return this.$store.state.posts.find(
+        (post) => post.id === this.thread?.posts?.[0]
+      )?.text;
     },
   },
   methods: {
     async save({ title, text }) {
-      const thread = await this.$store.dispatch("createThread", {
-        forumId: this.forum.id,
+      const thread = await this.$store.dispatch("updateThread", {
+        id: this.id,
         title,
         text,
       });
