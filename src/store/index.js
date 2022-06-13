@@ -40,7 +40,7 @@ export default createStore({
     },
     async updateThread({commit, state}, { text, title, id}) {
       const thread = state.threads.find(thread => thread.id === id)
-      const post = state.posts.find(post => post.id === thread.post[0])
+      const post = state.posts.find(post => post.id === thread.posts[0])
       const newThread = {...thread, title }
       const newPost = {...post, text }
       commit('setThread', {thread: newThread})
@@ -64,7 +64,7 @@ export default createStore({
   },
   mutations: {
     setPost(state, { post }) {
-      const index = state.post.findIndex(p => p.id === post.id)
+      const index = state.posts.findIndex(p => p.id === post.id)
       if (post.id && index !== -1) {
         state.posts[index] = post
       } else {
@@ -72,7 +72,7 @@ export default createStore({
       }
     },
     setThread(state, { thread }) {
-      const index = state.thread.findIndex(t => t.id === thread.id)
+      const index = state.threads.findIndex(t => t.id === thread.id)
       if (thread.id && index !== -1) {
         state.threads[index] = thread
       } else {
